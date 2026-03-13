@@ -1,3 +1,4 @@
+
 //Defines what a transaction object looks like
 //Stores amount, category, date, descrption
 // Declares a constructor(how transactions get created)
