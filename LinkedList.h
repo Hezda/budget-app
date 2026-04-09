@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include "Node.h"
+#include <iomanip>
 using namespace std;
 
 class LinkedList {
@@ -81,5 +82,50 @@ double getTotal() {
 }
 
 
-};   
+void displayTransactions(){
+    if ( head== nullptr){
+        cout<<"No transactions found. "<<endl;
+        return;
+    cout<<"\n================================================"<<endl;
+    cout<<"       TRANSACTION HISTORY                        "<<endl;
+    cout<<"=================================================="<<endl;
+    cout<<left
+        <<setw(5)<< "No."
+        <<setw(15) <<"Category"
+        <<setw(10)<<"Amount"
+        <<setw(12)<<" Date "
+        <<"Description"
+        <<endl;
+    cout<<"----------------------------------------------------"<<endl;
+
+    Node* temp=head;
+    int num=1;
+    
+    while (temp!=nullptr){
+        cout<<left
+            <<setw(5)<<num
+            <<setw(15)<<temp->data.category
+            <<"$"
+            <<setw(9) << fixed << setprecision(2)
+                      <<temp->data.amount  
+                      << setw(12) << temp->data.date
+                      << temp->data.description
+                      << endl;
+                 num++;
+                 temp = temp->next;         // move to next node
+             }
+     
+             cout << "------------------------------------------" << endl;
+             cout << right << setw(27) << "Total: $" 
+                  << fixed << setprecision(2) << getTotal() << endl;
+             cout << "==========================================" << endl;
+         }    
+    }
+
+
+
+    
+
+};
+  
 #endif

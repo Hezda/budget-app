@@ -5,6 +5,7 @@
 using namespace std;
 
 int main() {
+    LinkedList list;
     int choice;
     do {
         cout<<"\n=== Finance Tracker ==="<< endl;
@@ -37,7 +38,6 @@ int main() {
 
    
     // LinkedList test
-    LinkedList list;
     list.insert(t1);
     Transaction t2(15.0, "Transport", "02/12/2026", "Uber");
     list.insert(t2);
@@ -50,12 +50,15 @@ int main() {
 
     cout << "Total: " << list.getTotal() << endl;
 
-    return 0;
+  
 
    break;
         }
 
-        case 2: cout << "View transactions - coming in Week 2" << endl; break;
+        case 2:{
+            list.displayTransactions();
+    break;
+        }
         case 3: cout << "Search - coming in Week 5" << endl; break;
         case 4: cout << "View balance - coming in Week 7" << endl; break;
         case 5: cout << "Goodbye!" << endl; break;
