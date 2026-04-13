@@ -63,17 +63,15 @@ int main() {
    break;
         }
 
-<<<<<<< HEAD
         case 2:{
             list.displayTransactions();
     break;
         }
-=======
         case 2: cout << "\n=== All Transactions===" << endl; 
         list.display();
         break;
->>>>>>> ed0f724 (week 3: Implemented TransactionQueue for recent transaction and integrated into main)
-        case 3: cout << "Search - coming in Week 5" << endl; break;
+
+case 3: cout << "Search - coming in Week 5" << endl; break;
         case 4: 
         recentQueue.displayRecent();
         break;
