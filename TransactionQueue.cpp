@@ -41,11 +41,9 @@ void TransactionQueue:: dequeue(){ // removes item frrom front
     size--;
     if (front == nullptr){ // iff queue became empty after deletion: set rear to nullptr too
        rear = nullptr;
-    }    
-      if (front == nullptr){
-            rear = nullptr;
-
-        }
+    } 
+}
+   
 void TransactionQueue:: displayRecent(){ // prints all transcactions in queue
     if (isEmpty()){
         cout <<"No recent transactions. \n";
@@ -61,6 +59,6 @@ void TransactionQueue:: displayRecent(){ // prints all transcactions in queue
             cout<< "-------------------------------- "<< endl;
             current = current-> next;
 
-        
+        }
     }
-}
+

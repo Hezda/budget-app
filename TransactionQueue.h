@@ -11,7 +11,7 @@ class TransactionQueue {
 
 public:
     TransactionQueue();
-    void dequeue(Transaction t);
+    void enqueue(Transaction t);
     void dequeue();
     void displayRecent();
     bool isEmpty();
