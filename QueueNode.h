@@ -7,10 +7,10 @@ class QueueNode{
     public: Transaction data; // stores the transaction
     QueueNode* next; //points to teh next node
 
-    QueueNode(Transaction t){
-        data = t;
-        next = nullptr;
+    QueueNode(Transaction t):data(t), next(nullptr) {}
+       
     
-    }
-};
+    };
+    
+
 #endif
