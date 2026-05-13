@@ -19,7 +19,9 @@ int main() {
         cout <<"3. Search transaction" <<endl;
         cout <<"4. View recent Transactions" <<endl;
         cout<<"5.View balance" <<endl;
-        cout<<"6.Exit" <<endl;
+        cout<<"6.View spending by category"<<endl;
+        cout<<"7.Sort transactions"<<endl;
+        cout<<"8.Exit"<<endl;
         cout<<"Enter choice:";
         cin>>choice;
     
@@ -32,7 +34,10 @@ int main() {
             cout<<"Enter amount: ";cin>>amount;
             cout <<"Enter category: "; cin>> category;
             cout<< "Enter date: "; cin>>date;
-            cout<< " Enter description: "; cin>> description;
+            cout << "Enter description: ";
+            cin.ignore();
+            getline(cin, description);
+        
 
 
     Transaction t1(amount ,category , date , description);
@@ -54,22 +59,62 @@ int main() {
         }
     
 case 3: {// Search transactions by category
-    string category;
-    cout << "Enter category to search: ";
-    cin >> category;
+    int searchChoice;
 
-    list.searchByCategory(category); //Call linked list search function
+    cout << "\n=== Search Menu ===" << endl;
+    cout << "1. Search by category" << endl;
+    cout << "Enter choice: ";
+    cin >> searchChoice;
+
+    if(searchChoice == 1)
+    {
+        string category;
+
+        cout << "Enter category: ";
+        cin >> category;
+
+        cout << "\n=== Search Results ===" << endl;
+
+        list.searchByCategory(category);
+    }
     break;
 }
-        case 4: 
-        recentQueue.displayRecent();
-        break;
-        case 5: cout << "View balance/ total: " << list.getTotal() << endl; 
-        break;
-        case 6: cout << "Goodbye!" << endl; break;
-        default: cout << "Invalid option, try again." << endl;
+case 6:
+
+    cout << "\n=== Spending by Category ===" << endl;
+
+    for (auto pair : categoryTotals)
+    {
+        cout << pair.first << ": $" << pair.second << endl;
     }
-} while (choice != 6); // keep looping until user picks Exit
+
+    break;
+
+case 7:{
+    int sortChoice;
+
+    cout << "\n=== Sort Menu ===" << endl;
+    cout << "1. Sort by amount" << endl;
+    cout << "Enter choice: ";
+    cin >> sortChoice;
+
+    if(sortChoice == 1)
+    {
+        cout << "\n=== Sorted Transactions ===" << endl;
+
+        list.sortByAmount();
+    }
+   
+    break;
+}
+    case 8:
+    cout << "Goodbye!" << endl;
+
+default:
+    cout << "Invalid option, try again." << endl;
+       
+    }
+} while (choice != 8); // keep looping until user picks Exit
 
 return 0;
 
