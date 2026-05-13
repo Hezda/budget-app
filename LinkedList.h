@@ -85,7 +85,7 @@ double getTotal() {
 void displayTransactions(){
     if ( head== nullptr){
         cout<<"No transactions found. "<<endl;
-        return;
+        return;}
     cout<<"\n================================================"<<endl;
     cout<<"       TRANSACTION HISTORY                        "<<endl;
     cout<<"=================================================="<<endl;
@@ -120,12 +120,90 @@ void displayTransactions(){
                   << fixed << setprecision(2) << getTotal() << endl;
              cout << "==========================================" << endl;
          }    
-    }
+    
 
 
 
     
+void searchByCategory(string category) { // Search linked list for matching category
+    Node* temp = head; // Traverse through each node
+    bool found = false;
 
+    while (temp != nullptr) { //Check if category matches
+        if (temp->data.category == category) {
+            cout << "Amount: " << temp->data.amount << endl;
+            cout << "Category: " << temp->data.category << endl;
+            cout << "Date: " << temp->data.date << endl;
+            cout << "Description: " << temp->data.description << endl;
+            cout << "-------------------" << endl;
+            found = true;
+        }
+
+        temp = temp->next;
+    }
+
+    if (!found) {
+        cout << "No transactions found in category: " << category << endl;
+    }
+}
+// Sort transactions by amount using Bubble Sort
+void sortByAmount() {
+    if (head == nullptr) {
+        cout << "No transactions to sort." << endl;
+        return;
+    }
+
+    bool swapped;
+    Node* temp;
+    Node* last = nullptr;
+
+    do {
+        swapped = false;
+        temp = head;
+
+        while (temp->next != last) {
+            // Compare two neighboring transactions
+            if (temp->data.amount > temp->next->data.amount) {
+                // Swap the transaction data
+                Transaction swapTemp = temp->data;
+                temp->data = temp->next->data;
+                temp->next->data = swapTemp;
+
+                swapped = true;
+            }
+
+            temp = temp->next;
+        }
+
+        last = temp;
+
+    } while (swapped);
+
+    cout << "Transactions sorted by amount." << endl;
+}
+void showLargestTransaction() {
+    if (head == nullptr) {
+        cout << "No transactions found." << endl;
+        return;
+    }
+
+    Node* temp = head;
+    Node* largest = head;
+
+    while (temp != nullptr) {
+        if (temp->data.amount > largest->data.amount) {
+            largest = temp;
+        }
+
+        temp = temp->next;
+    }
+
+    cout << "\n=== Largest Transaction ===" << endl;
+    cout << "Amount: $" << largest->data.amount << endl;
+    cout << "Category: " << largest->data.category << endl;
+    cout << "Date: " << largest->data.date << endl;
+    cout << "Description: " << largest->data.description << endl;
+}
 };
   
 #endif

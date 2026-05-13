@@ -2,12 +2,15 @@
 #include "Transaction.h"
 #include "LinkedList.h"
 #include "TransactionQueue.h"
+#include <unordered_map>
 
 using namespace std;
 
 int main() {
     LinkedList list;
     TransactionQueue recentQueue;
+    unordered_map<string, double> categoryTotals; //updates totals (hash)
+
     int choice;
     do {
         cout<<"\n=== Finance Tracker ==="<< endl;
@@ -35,6 +38,8 @@ int main() {
     Transaction t1(amount ,category , date , description);
     list.insert(t1);
     recentQueue.enqueue(t1);
+
+    categoryTotals[category] += amount; // actual functionality updates the hash table every time a transaction is added.
     
     cout << "Transaction added successfully! " << endl;
 
@@ -48,7 +53,14 @@ int main() {
     break;
         }
     
-case 3: cout << "Search - coming in Week 5" << endl; break;
+case 3: {// Search transactions by category
+    string category;
+    cout << "Enter category to search: ";
+    cin >> category;
+
+    list.searchByCategory(category); //Call linked list search function
+    break;
+}
         case 4: 
         recentQueue.displayRecent();
         break;
