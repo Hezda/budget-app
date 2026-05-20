@@ -8,6 +8,7 @@ using namespace std;
 
 int main() {
     LinkedList list;
+    list.loadFromFile(); 
     TransactionQueue recentQueue;
     unordered_map<string, double> categoryTotals; //updates totals (hash)
 
@@ -32,16 +33,15 @@ int main() {
             double amount;
             string category, date, description;
             cout<<"Enter amount: ";cin>>amount;
-            cout <<"Enter category: "; cin>> category;
-            cout<< "Enter date: "; cin>>date;
-            cout << "Enter description: ";
             cin.ignore();
-            getline(cin, description);
+            cout <<"Enter category: "; getline(cin, category); 
+            cout << "Enter date: "; getline(cin, date);
+            cout << "Enter description: "; getline(cin, description);
         
-
-
+    
     Transaction t1(amount ,category , date , description);
     list.insert(t1);
+    list.saveToFile(); 
     recentQueue.enqueue(t1);
 
     categoryTotals[category] += amount; // actual functionality updates the hash table every time a transaction is added.
@@ -79,6 +79,18 @@ case 3: {// Search transactions by category
     }
     break;
 }
+
+case 4: {
+    recentQueue.displayRecent();
+    break;
+
+}
+
+case 5: {
+    cout << "\n=== Account Balance ===" << endl;
+    cout << "Total spent: $" << fixed << setprecision(2) << list.getTotal() << endl;
+    break;
+}
 case 6:
 
     cout << "\n=== Spending by Category ===" << endl;
@@ -109,6 +121,7 @@ case 7:{
 }
     case 8:
     cout << "Goodbye!" << endl;
+    break;
 
 default:
     cout << "Invalid option, try again." << endl;

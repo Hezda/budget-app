@@ -5,6 +5,7 @@
 #include <string>
 #include "Node.h"
 #include <iomanip>
+#include <fstream>
 using namespace std;
 
 class LinkedList {
@@ -203,6 +204,42 @@ void showLargestTransaction() {
     cout << "Category: " << largest->data.category << endl;
     cout << "Date: " << largest->data.date << endl;
     cout << "Description: " << largest->data.description << endl;
+}
+void saveToFile() {
+    ofstream file("transactions.txt");
+
+    Node* temp = head;
+    while (temp != nullptr) {
+        file << temp->data.amount << "\n"
+             << temp->data.category << "\n"
+             << temp->data.date << "\n"
+             << temp->data.description << "\n"
+             << "---\n";
+        temp = temp->next;
+    }
+
+    file.close();
+}
+
+void loadFromFile() {
+    ifstream file("transactions.txt");
+    if (!file.is_open()) return; // no file yet, that's fine
+
+    string line, category, date, description;
+    double amount;
+
+    while (file >> amount) {
+        file.ignore();
+        getline(file, category);
+        getline(file, date);
+        getline(file, description);
+        getline(file, line); // skip the "---"
+
+        Transaction t(amount, category, date, description);
+        insert(t);
+    }
+
+    file.close();
 }
 };
   
